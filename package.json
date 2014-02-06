@@ -1,0 +1,35 @@
+{
+    "name": "simple-walk",
+    "description": "Simple walk is a little helper to walk folders recursively.",
+    "homepage": "https://github.com/jo-asakura/simple-walk",
+    "keywords": [
+        "node module",
+        "server",
+        "walk",
+        "file system"
+    ],
+    "author": {
+        "name": "Alexandr Marinenko",
+        "email": "alexander.marinenko@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/jo-asakura/simple-walk.git"
+    },
+    "main": "simple-walk.js",
+    "version": "0.1.1",
+    "devDependencies": {
+        "underscore": "*"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://raw.github.com/jo-asakura/simple-walk/master/LICENSE"
+        }
+    ],
+    "files": [
+        "simple-walk.js",
+        "LICENSE"
+    ],
+    "readmeFilename": "README.md"
+}
