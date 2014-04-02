@@ -17,7 +17,7 @@
         "url": "git://github.com/jo-asakura/simple-walk.git"
     },
     "main": "simple-walk.js",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "dependencies": {
         "underscore": "*"
     },

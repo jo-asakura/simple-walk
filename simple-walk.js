@@ -14,17 +14,33 @@
         match: function (path, matchRule) {
             var result = [];
 
-            var stats = fs.statSync(path);
-            if (stats.isFile()) {
-                var match = path.match(matchRule) || [];
-                if (match.length === 1) {
-                    result.push(path);
+            if (path.indexOf('**') >= 0) {
+                var paths = path.split('**') || [];
+                // TODO for all the cases not only === 2
+                if (paths.length === 2) {
+                    var list = fs.readdirSync(paths[0]) || [];
+                    result = _.reduce(list, function (memo, item) {
+                        var itemPath = paths[0] + item;
+                        var itemStat = fs.statSync(itemPath);
+                        if (itemStat.isDirectory()) {
+                            memo = _.union(memo, obj.match(itemPath + paths[1], matchRule));
+                        }
+                        return memo;
+                    }, []);
                 }
-            } else if (stats.isDirectory()) {
-                var list = fs.readdirSync(path) || [];
-                list.forEach(function (dir) {
-                    result = _.union(result, obj.match(path + '/' + dir, matchRule));
-                });
+            } else if (fs.existsSync(path)) {
+                var stats = fs.statSync(path);
+                if (stats.isFile()) {
+                    var match = path.match(matchRule) || [];
+                    if (match.length === 1) {
+                        result.push(path);
+                    }
+                } else if (stats.isDirectory()) {
+                    var list = fs.readdirSync(path) || [];
+                    list.forEach(function (dir) {
+                        result = _.union(result, obj.match(path + '/' + dir, matchRule));
+                    });
+                }
             }
 
             return result;
